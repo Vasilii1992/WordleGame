@@ -72,12 +72,10 @@ extension KeyboardViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension KeyboardViewController: UICollectionViewDelegateFlowLayout {
     
-    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let margin: CGFloat = 20
-        let size: CGFloat = (collectionView.frame.size.width - margin)/10
-        
-        return CGSize(width: size, height: size * 1.5)
+        let availableWidth = collectionView.frame.size.width - 20
+        let cellSize = availableWidth / 10
+        return CGSize(width: cellSize, height: cellSize * 1.5)
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

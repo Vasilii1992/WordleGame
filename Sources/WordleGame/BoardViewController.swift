@@ -77,11 +77,9 @@ extension BoardViewController: UICollectionViewDelegateFlowLayout {
     
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let margin: CGFloat = 20
-        let size: CGFloat = (collectionView.frame.size.width - margin)/5
-        
-        
-        return CGSize(width: size, height: size)
+        let availableWidth = collectionView.frame.size.width - 40 
+        let cellSize = availableWidth / 5
+        return CGSize(width: cellSize, height: cellSize)
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

@@ -23,6 +23,25 @@ public final class WordleViewController: UIViewController {
         setupCustomButton()
     }
     
+    public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { _ in
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+            
+            self.boardVC.collectionView.collectionViewLayout.invalidateLayout()
+            self.keyboardVC.collectionView.collectionViewLayout.invalidateLayout()
+        })
+    }
+    public override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        boardVC.collectionView.collectionViewLayout.invalidateLayout()
+        keyboardVC.collectionView.collectionViewLayout.invalidateLayout()
+    }
+
+    
     private func setupCustomButton() {
         let backButton = UIBarButtonItem(image: backButtonImage ?? UIImage(systemName: "chevron.left"),
                                          style: .plain,
@@ -62,9 +81,9 @@ public final class WordleViewController: UIViewController {
             boardVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             boardVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             boardVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            boardVC.view.bottomAnchor.constraint(equalTo: keyboardVC.view.topAnchor),
             boardVC.view.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
 
+            keyboardVC.view.topAnchor.constraint(equalTo: boardVC.view.bottomAnchor),
             keyboardVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             keyboardVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             keyboardVC.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
